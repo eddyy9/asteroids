@@ -10,7 +10,6 @@ public class PlayerManager : MonoBehaviour
     
     private float currentLives;
 
-    // Добавляем публичное свойство для доступа к игроку
     public TopDownShipController CurrentPlayer => player;
 
     private void Start()

@@ -160,7 +160,6 @@ public class HeartUI : MonoBehaviour
         return false;
     }
     
-    // Восстановление здоровья (для будущих улучшений)
     public void Heal()
     {
         if (currentState == HeartState.Empty)

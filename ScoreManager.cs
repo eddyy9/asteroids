@@ -14,17 +14,14 @@ public class ScoreManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // Исправлено имя метода
         GameEvents.OnAsteroidDestroyed += HandleAsteroidDestroyed;
     }
     
     private void OnDisable()
     {
-        // Исправлено имя метода
         GameEvents.OnAsteroidDestroyed -= HandleAsteroidDestroyed;
     }
 
-    // Исправлено имя метода (убрана опечатка)
     private void HandleAsteroidDestroyed(Vector3 position)
     {
         currentScore += pointsPerAsteroid;

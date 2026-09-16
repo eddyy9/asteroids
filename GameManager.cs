@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Делаем статический доступ (Singleton), чтобы другие скрипты могли легко к нему обращаться
     public static GameManager Instance { get; private set; }
 
     [Header("Settings - Unlock Requirements")]
@@ -17,7 +16,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        // Проверка Синглтона: если GameManager уже есть, удаляем дубликат
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
@@ -25,14 +23,12 @@ public class GameManager : MonoBehaviour
         }
 
         Instance = this;
-        // Позволяет объекту жить при смене сцены (из Меню в Игру и обратно)
         DontDestroyOnLoad(gameObject);
     }
 
     private void OnEnable()
     {
         GameEvents.OnGameOver += HandleGameOver;
-        // Подпишемся здесь позже на сбор ресурсов, когда обновим другие скрипты
     }
 
     private void OnDisable()
@@ -40,7 +36,6 @@ public class GameManager : MonoBehaviour
         GameEvents.OnGameOver -= HandleGameOver;
     }
     
-    // Метод, который мы будем вызывать из скрипта игрока при подборе
     public void AddResource(int amount)
     {
         currentResources += amount;
@@ -48,7 +43,6 @@ public class GameManager : MonoBehaviour
         CheckProgression();
     }
 
-    // Метод, который мы вызовем после успешного сканирования
     public void AddResearch()
     {
         currentResearch++;
@@ -60,7 +54,6 @@ public class GameManager : MonoBehaviour
     {
         if (isDashUnlocked) return;
 
-        // Если собрали ресурсы И провели исследования -> Открываем Dash
         if (currentResources >= resourcesForDash && currentResearch >= researchForDash)
         {
             isDashUnlocked = true;
